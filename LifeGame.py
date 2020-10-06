@@ -1,4 +1,3 @@
-# edited file
 # Python code to implement Conway's Game Of Life 
 import argparse 
 import numpy as np 
