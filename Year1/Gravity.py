@@ -12,19 +12,17 @@
 import os
 import glob
 import time
-
-#Function to drop object
-
+import RPi.GPIO as GPIO
 
 
-#define addresses for objects
-object1 = ''
-object2 = ''
-object3 = ''
+#Set up button
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 
 #open file to write results to in case of error
-f = open("results.txt","w")
+f = open("results_gravity.txt","w")
 
 #BEGINING OF THE EXPERIMENT
 print 'Welcome to the Gravitional Constant lab experiment.\nIn this lab you will measure the acceleration due to gravity of multiple objects of varying masses, and observe how the acceleration differs.\n'
@@ -39,34 +37,23 @@ raw_input("When you are ready to drop the first object, please press Enter")
 #Drop and time first object
 print 'The object will drop in....\n3...'
 time.sleep(1)
-print '2...\n'
+print '2...'
 time.sleep(1)
-print '1...\n'
+print '1...'
 time.sleep(1)
-print '0!\n'
+print '0!'
 #turn off magnet
 start_time = time.time()
+
 #wait for switch
-while not trigger:
-	#Check file for trigger
-	if :
-		trigger = True
+while True:
+	if GPIO.input(10) == GPIO.HIGH:
+		print("\nButton pressed!")
+		fall_time = round(time.time() - start_time,3)
+		break
 
-fall_time = round(time.time() - start_time,3)
-
-print 'The first object took ' + fall_time + ' seconds to fall'
-f.write("Object 1 = " + fall_time + " s\n")
-
-raw_input("When you are ready to drop the second object, please press Enter.")
-
-
-#drop and time 2nd object
-
-
-
-#Drop and time 3rd object
-
-
+print 'The first object took ' + repr(fall_time) + ' seconds to fall'
+f.write("Object 1 = " + repr(fall_time) + " s\n")
 
 
 #END OF THE EXPERIMENT
