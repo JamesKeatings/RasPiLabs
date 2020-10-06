@@ -17,36 +17,36 @@ import sys
 
 
 #I think this can now be done via raspi-config interface option for 1-wire?
-#os.system('modprobe w1-gpio')
-#os.system('modprobe w1-therm')
+os.system('modprobe w1-gpio')
+os.system('modprobe w1-therm')
 
-
-#def getTemp(id):
-#   if id == 'cpu':
-#      file = open("/sys/class/thermal/thermal_zone0/temp",'r')
-#      temp = int(file.readline())
-#   else
-#      file = open('/sys/bus/w1/devices/' + id + '/w1_slave', 'r')
-#      line = file.readline()
-#      crc = line.rsplit(' ',1)
-#      crc = crc[1].replace('\n', '')
-#      if crc=='YES':
-#         line = file.readline()
-#         temp = int(line.rsplit('t=',1)[1]) /1000.0
-#         temp = round(temp, 1) #Round to one decimal place and convert to string
-#      else:
-#         temp = 99999
-#   file.close()
-#   return temp
 
 def getTemp(id):
-	return 85
+   if id == 'cpu':
+      file = open("/sys/class/thermal/thermal_zone0/temp",'r')
+      temp = int(file.readline())
+   else:
+      file = open('/sys/bus/w1/devices/' + id + '/w1_slave', 'r')
+      line = file.readline()
+      crc = line.rsplit(' ',1)
+      crc = crc[1].replace('\n', '')
+      if crc=='YES':
+         line = file.readline()
+         temp = int(line.rsplit('t=',1)[1]) /1000.0
+         temp = round(temp, 1) #Round to one decimal place and convert to string
+      else:
+         temp = 99999
+   file.close()
+   return temp
+
+#def getTemp(id):
+#	return 85
 
 #SET MAX TEMP
-goaltemp = 80.0
+goaltemp = 45.0
 #SET WATER TEMP ADDRESS
-water = '28-8000000480ae'
-ambient = '28-8000000480ae'
+water = '28-01144fd886aa'
+ambient = '28-9e4ed71964ff'
 
 
 #open file to write results to in case of error
@@ -70,24 +70,28 @@ raw_input("Press Enter to continue.")
 print('\nWe will now start to heat the water in the container until it reaches ' + repr(goaltemp) + ' C.')
 #Turn on USB power
 #os.system('uhubctl -a on')
-j = 20
-#while getTemp(water) < goaltemp:
-	#print('Current water temp = ' + repr(getTemp(water)))
-while j < goaltemp:
-	print '\rCurrent water temp = ' + repr(j) + ' C' ,
-	sys.stdout.flush()
+
+
+while getTemp(water) < goaltemp:
+	print('Current water temp = ' + repr(getTemp(water)))
 	time.sleep(1)
-	j += 1
+#j = 20
+#while j < goaltemp:
+#	print '\rCurrent water temp = ' + repr(j) + ' C' ,
+#	sys.stdout.flush()
+#	time.sleep(1)
+#	j += 1
 #Turn off USB power
 #os.system('uhubctl -a off')
-print('\rCurrent water temp = ' + repr(j) + ' C')
+print('\rCurrent water temp = ' + repr(getTemp(water)) + ' C')
 print('Heating complete!')
 
 
 #Measure temperature of water as it cools
 print('\nThe water has now reached the desired temperature and will be allowed to cool. The temperature of the water will be printed every minute for an hour, make a record of each value.')
 i = 0
-while i < 60:
+time_limit = 60
+while i < time_limit:
 	print('[' + repr(i) + '] Current temperature: ' + repr(getTemp(water)) + ' C')
 	f.write('[' + repr(i) + ']		' + repr(getTemp(water)) + "\n")
 	i+=1
