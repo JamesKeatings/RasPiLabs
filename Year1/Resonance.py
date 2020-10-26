@@ -1,11 +1,10 @@
 #/usr/bin/env python
 #
-#	BiotsLaw.py
+#	Resonance.py
 #       Python script for UWS first year lab
-#       Biot's Law experiment
+#       Resonances experiment
 #       James Keatings
 #       James.Keatings@uws.ac.uk
-#	Based on fridge.py by Tom Caddell
 #
 #
 
@@ -15,31 +14,6 @@ import glob
 import time
 
 
-#I think this can now be done via raspi-config interface option for 1-wire?
-#os.system('modprobe w1-gpio')
-#os.system('modprobe w1-therm')
-
-
-#def getTemp(id):
-#   if id == 'cpu':
-#      file = open("/sys/class/thermal/thermal_zone0/temp",'r')
-#      temp = int(file.readline())
-#   else
-#      file = open('/sys/bus/w1/devices/' + id + '/w1_slave', 'r')
-#      line = file.readline()
-#      crc = line.rsplit(' ',1)
-#      crc = crc[1].replace('\n', '')
-#      if crc=='YES':
-#         line = file.readline()
-#         temp = int(line.rsplit('t=',1)[1]) /1000.0
-#         temp = round(temp, 1) #Round to one decimal place and convert to string
-#      else:
-#         temp = 99999
-#   file.close()
-#   return temp
-
-def getTemp(id):
-	return 85
 
 #SET MAX TEMP
 goaltemp = 80.0

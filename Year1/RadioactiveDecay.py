@@ -4,6 +4,7 @@
 #       Python script for UWS first year lab
 #       Radioactive Decay experiment
 #       James Keatings
+#       James.Keatings@uws.ac.uk 
 #
 #
 
