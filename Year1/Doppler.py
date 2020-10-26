@@ -25,12 +25,20 @@ print('A sound emitter producing a constant noise is passing a stationary microp
 #Move the emitter
 print('The sound emitter will now pass by the microphone at *insert speed here"')
 
+points_x=[0]
+pooints_y=[0]
+
+
 start_time = time.time()
 #START EMITTER
 #RECORD FREQUENCY FROM MICROPHONE
 move_time = round(time.time() - start_time,3)
-#PLOT GRAPH OF FREQUENCY
 
+
+#Plot graph of results
+print('The results have now been recorded and now a graph will displayed showing how the frequency changes over time.')
+p1=plt.scatter(points_x, points_y, s=50)
+plt.show(p1)
 
 #End experiment
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
