@@ -25,23 +25,23 @@ GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 f = open("results_gravity.txt","w")
 
 #BEGINING OF THE EXPERIMENT
-print 'Welcome to the Gravitional Constant lab experiment.\nIn this lab you will measure the acceleration due to gravity of multiple objects of varying masses, and observe how the acceleration differs.\n'
-raw_input("When you are ready to begin please press Enter to continue.")
+print('Welcome to the Gravitional Constant lab experiment.\nIn this lab you will measure the acceleration due to gravity of multiple objects of varying masses, and observe how the acceleration differs.\n')
+input("When you are ready to begin please press Enter to continue.")
 
 
 #Explanation for stduent
-print 'There are 3 objects of different masses suspended using an electromagnet. When the current is cut to the magnet the object will fall, after an amount of time it will fall onto a switch. Using the time difference between the begining and end of the fall you will calculate the acceleration due to gravity experienced by the 3 objects.\n'
-raw_input("When you are ready to drop the first object, please press Enter")
+print('There are 3 objects of different masses suspended using an electromagnet. When the current is cut to the magnet the object will fall, after an amount of time it will fall onto a switch. Using the time difference between the begining and end of the fall you will calculate the acceleration due to gravity experienced by the 3 objects.\n')
+input("When you are ready to drop the first object, please press Enter")
 
 
 #Drop and time first object
-print 'The object will drop in....\n3...'
+print('The object will drop in....\n3...')
 time.sleep(1)
-print '2...'
+print('2...')
 time.sleep(1)
-print '1...'
+print('1...')
 time.sleep(1)
-print '0!'
+print('0!')
 #turn off magnet
 start_time = time.time()
 
@@ -52,9 +52,9 @@ while True:
 		fall_time = round(time.time() - start_time,3)
 		break
 
-print 'The first object took ' + repr(fall_time) + ' seconds to fall'
+print('The first object took ' + repr(fall_time) + ' seconds to fall')
 f.write("Object 1 = " + repr(fall_time) + " s\n")
 
 
 #END OF THE EXPERIMENT
-print 'You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n'
+print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
