@@ -58,7 +58,7 @@ while True:
 		break
 
 print('The first object took ' + repr(fall_time) + ' seconds to fall')
-acceleration = round(0.5 * height * fall_time**2,3)
+acceleration = round(2 * height / fall_time**2,3)
 print('For a ' + repr(height) + ' m fall, this gives acceleration equal to ' + repr(acceleration) + ' m/s^2')
 f.write("Object 1 = " + repr(fall_time) + " s\n")
 
