@@ -13,6 +13,7 @@ import os
 import glob
 import time
 import RPi.GPIO as GPIO
+import sys
 
 
 #Set up button
@@ -23,6 +24,10 @@ GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #open file to write results to in case of error
 f = open("results_gravity.txt","w")
+
+
+#define height of set up
+height = 1
 
 #BEGINING OF THE EXPERIMENT
 print('Welcome to the Gravitional Constant lab experiment.\nIn this lab you will measure the acceleration due to gravity of multiple objects of varying masses, and observe how the acceleration differs.\n')
@@ -53,8 +58,11 @@ while True:
 		break
 
 print('The first object took ' + repr(fall_time) + ' seconds to fall')
+acceleration = round(0.5 * height * fall_time**2,3)
+print('For a ' + repr(height) + ' m fall, this gives acceleration equal to ' + repr(acceleration) + ' m/s^2')
 f.write("Object 1 = " + repr(fall_time) + " s\n")
 
 
 #END OF THE EXPERIMENT
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
+sys.exit()
