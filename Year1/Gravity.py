@@ -39,6 +39,10 @@ print('There are 3 objects of different masses suspended using an electromagnet.
 input("When you are ready to drop the first object, please press Enter")
 
 
+#Place the ball?
+#GPIO.input(x)=GPIO.HIGH
+
+
 #Drop and time first object
 print('The object will drop in....\n3...')
 time.sleep(1)
@@ -48,6 +52,7 @@ print('1...')
 time.sleep(1)
 print('0!')
 #turn off magnet
+#GPIO.input(x) = GPIO.HIGH
 start_time = time.time()
 
 #wait for switch
