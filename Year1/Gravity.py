@@ -16,11 +16,13 @@ import RPi.GPIO as GPIO
 import sys
 
 
-#Set up button
+#Set up GPIO
+button_pin = 10
+magnet_pin = 16
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #BUTTON
-GPIO.setup(16, GPIO.OUT)                            #TRANSISTOR FOR MAGNET
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #BUTTON
+GPIO.setup(magnet_pin, GPIO.OUT)                            #TRANSISTOR FOR MAGNET
 
 #open file to write results to in case of error
 f = open("results_gravity.txt","w")
@@ -41,7 +43,7 @@ input("When you are ready to attach the first object to the magnet, please press
 
 #Place the ball
 print('\nThe magnet is now actived. Please place the ball onto the magnet.')
-GPIO.output(16, 1)
+GPIO.output(magnet_pin, 1)
 input('When the metal ball is secured and you are ready to drop, please press enter.')
 
 #Drop and time first object
@@ -53,12 +55,12 @@ print('1..')
 time.sleep(1)
 print('0!')
 #turn off magnet
-GPIO.output(16, 0)
+GPIO.output(magnet_pin, 0)
 start_time = time.time()
 
 #wait for switch
 while True:
-	if GPIO.input(10) == GPIO.HIGH:
+	if GPIO.input(button_pin) == GPIO.HIGH:
 		print("\nButton pressed!")
 		fall_time = round(time.time() - start_time,3)
 		break
