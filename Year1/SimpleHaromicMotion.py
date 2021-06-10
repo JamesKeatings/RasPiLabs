@@ -18,6 +18,7 @@ import RPi.GPIO as GPIO
 
 #Definitions
 IR_pin = 11
+magnet_pin = 16
 n = 20
 start = 1
 
@@ -25,7 +26,9 @@ start = 1
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(IR_pin, GPIO.IN)
+GPIO.setup(magnet_pin, GPIO.OUT)
 
+GPIO.output(magnet_pin,0)
 
 #open file to write results to in case of error
 f = open("results_SimpleHarmonicMotion.txt","w")
@@ -46,7 +49,10 @@ input("Press Enter to continue.")
 #PLACE THE MASS AT STARTING POSITION
 print('\nPlease attach the weight to the electromagnet.')
 input("Press Enter to continue.")
+GPIO.output(magnet_pin,1)
 
+
+#TURN OFF MAGNET
 print("The weight will now be relased and the period of " + repr(n) + " oscillation recorded.")
 print("Releaseing the weight in 3......")
 time.sleep(1)
@@ -55,8 +61,8 @@ time.sleep(1)
 print("1..")
 time.sleep(1)
 print("0!")
+GPIO.output(magnet_pin,0)
 
-#TURN OFF ELECTROMAGNET
 
 #START TIMER WHEN PASSES SWITCH FIRST TIME
 i = start
