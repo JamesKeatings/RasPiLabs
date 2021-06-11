@@ -67,11 +67,12 @@ GPIO.output(magnet_pin,0)
 #START TIMER WHEN PASSES SWITCH FIRST TIME
 i = start
 total_time = 0
+sleep_time = 0.5
 while True:
     if GPIO.input(IR_pin) == GPIO.HIGH:
         print('Starting timing!')
         start_time = time.time()
-        time.sleep(1)
+        time.sleep(sleep_time)
         break
 
 #START TIMING EACH PERIOD
@@ -82,7 +83,7 @@ while i < n:
         total_time = total_time + period
         print(repr(i) + " :Period = " + repr(period) + " seconds")
         i=i+1
-        time.sleep(1)
+        time.sleep(sleep_time)
 
 #RESULTS
 average_time = round(total_time/(n-start),3)
