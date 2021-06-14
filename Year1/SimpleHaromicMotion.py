@@ -32,8 +32,10 @@ GPIO.output(magnet_pin,0)
 
 #open file to write results to in case of error
 f = open("results_SimpleHarmonicMotion.txt","w")
-#f.write('Goal Temp = ' + repr(goaltemp) +  ' C.\n')
-#f.write("Ambient Temp = " + repr(getTemp(ambient)) + ' C.\n')
+f.write('IR pin = ' + repr(IR_pin) + '\n')
+f.write("magnet_pin = " + repr(magnet_pin) + "\n")
+f.write("n = " + repr(n) + "\n")
+f.write("start = " + repr(start) + "\n\n")
 
 
 #BEGINING OF THE EXPERIMENT
@@ -82,12 +84,14 @@ while i < n:
         start_time=time.time()
         total_time = total_time + period
         print(repr(i) + " :Period = " + repr(period) + " seconds")
+        f.write("[" + repr(i) + "]          " + repr(period) + " s\n")
         i=i+1
         time.sleep(sleep_time)
 
 #RESULTS
 average_time = round(total_time/(n-start),3)
 print("After " + repr(n-start) + " oscillations, the average time is " + repr(average_time) + ".")
+f.write("\naverage = " + repr(average_time))
 
 #END EXPERIMENT
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
