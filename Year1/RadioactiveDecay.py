@@ -15,11 +15,11 @@ import random as rdm
 
 #BEGINING OF THE EXPERIMENT
 print("Welcome to the radioactive decay first year lab experiment. In this lab session we will investigate the nature of radioactive decay and observe how it is driven by statistics.")
-raw_input("When you are ready to start, please press Enter to continue.")
+input("When you are ready to start, please press Enter to continue.")
 
 #Explanation
 print("In this experiment we will simulate rolling numerous 6-sided dice with a random number generator. Each dice will represent a nucleus which has a 1 in 6 chance of decaying each unit of time (each dice roll).  If the dice lands on a 1 then we will consider the 'nucleus' has decayed. If we roll the remaining dice and repeat the process we can produce an estimation for how an amount of radioactive material decays over time.")
-raw_input("Press Enter to continue when ready.")
+input("Press Enter to continue when ready.")
 
 #Ask for number of dice
 print("How many dice would you like to try rolling? You are required to choose a value greater than 100 and less than 10,000,000.")
@@ -46,7 +46,7 @@ j = 0
 points_x = [0]
 points_y = [number]
 loop_length = 10
-sides = 20
+sides = 6
 sides = 1.0/sides
 for i in range(loop_length):
 	total = 0
@@ -58,13 +58,13 @@ for i in range(loop_length):
 	points_x.append(i+1)
 	points_y.append(number)
 	sum = number + total	
-	raw_input("[" + repr(i+1) + "] Out of " + repr(sum) + " remaining nuclei, a total of " + repr(total) + " have decayed and " + repr(number) + " have not.")
+	input("[" + repr(i+1) + "] Out of " + repr(sum) + " remaining nuclei, a total of " + repr(total) + " have decayed and " + repr(number) + " have not.")
 	#print("[" + repr(i) + "] Out of " + repr(sum) + " remaining nuclei, a total of " + repr(total) + " have decayed and " + repr(number) + " have not.")
 
 #Draw decay curve
 print("\nAll the dice have now been rolled. A graph of the results will now be produced. You will notice it has the shape of am exponential decay.")
 p1 = plt.scatter(points_x,points_y, s=50)
-plt.show(p1)
+plt.show()
 
 #Calculate decay constant
 curve_fit = np.polyfit(points_x,np.log(points_y),1)
