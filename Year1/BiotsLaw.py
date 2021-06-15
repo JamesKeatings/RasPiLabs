@@ -14,7 +14,14 @@ import os
 import glob
 import time
 import sys
+import RPi.GPIO as GPIO
 
+#Set up GPIO
+relay_pin = 37
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(relay_pin, GPIO.OUT)
+GPIO.output(relay_pin, 1)
 
 #I think this can now be done via raspi-config interface option for 1-wire?
 os.system('modprobe w1-gpio')
@@ -57,19 +64,18 @@ f.write("Ambient Temp = " + repr(getTemp(ambient)) + ' C.\n')
 
 #BEGINING OF THE EXPERIMENT
 print("Welcome to the Biot's Law lab experiment.\nIn this lab you will investigate Newton's Law of Cooling by measuring the temperature of a volume of water as it cools and loses heat to the surroundings.")
-raw_input("When you are ready to begin please prress Enter to continue.")
+input("When you are ready to begin please prress Enter to continue.")
 
 
 #Measure ambient temperature of the room before heating
 print('\nWe will take a measurement of the ambient temperature in the room now. Make a note of this value as you will need it to compare with later.')
 print('The ambient temperature in the room is ' +  repr(getTemp(ambient)) + ' C')
-raw_input("Press Enter to continue.")
+input("Press Enter to continue.")
 
 
 #Start heating the water
 print('\nWe will now start to heat the water in the container until it reaches ' + repr(goaltemp) + ' C.')
-#Turn on USB power
-#os.system('uhubctl -a on')
+GPIO.output(relay_pin, 0)
 
 
 while getTemp(water) < goaltemp:
@@ -81,8 +87,6 @@ while getTemp(water) < goaltemp:
 #	sys.stdout.flush()
 #	time.sleep(1)
 #	j += 1
-#Turn off USB power
-#os.system('uhubctl -a off')
 print('\rCurrent water temp = ' + repr(getTemp(water)) + ' C')
 print('Heating complete!')
 
@@ -95,7 +99,7 @@ while i < time_limit:
 	print('[' + repr(i) + '] Current temperature: ' + repr(getTemp(water)) + ' C')
 	f.write('[' + repr(i) + ']		' + repr(getTemp(water)) + "\n")
 	i+=1
-	time.sleep(60)
+	time.sleep(5)
 
 
 #End experiment
