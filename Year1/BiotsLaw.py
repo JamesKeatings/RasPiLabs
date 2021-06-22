@@ -104,3 +104,5 @@ while i < time_limit:
 
 #End experiment
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
+
+GPIO.cleanup()

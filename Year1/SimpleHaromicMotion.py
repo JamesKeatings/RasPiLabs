@@ -95,3 +95,6 @@ f.write("\naverage = " + repr(average_time))
 
 #END EXPERIMENT
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.\n')
+
+GPIO.cleanup()
+sys.exit()

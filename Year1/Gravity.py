@@ -73,4 +73,5 @@ f.write("Object 1 = " + repr(fall_time) + " s\n")
 
 #END OF THE EXPERIMENT
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.')
+GPIO.cleanup()
 sys.exit()
