@@ -17,15 +17,11 @@ import sys
 
 #Set up GPIO
 AO_pin = 0
-#SPICKL = 11         #ADC pin 1
-#SPIMISO = 9         #ADC pin 2
-#SPIMOSI = 10        #ADC pin 3
-#SPICS = 8            #ADC pin 4
-SPICKL = 23
-SPIMISO = 21
-SPIMOSI = 19
-SPICS = 24
-moswitch_pin = 16    #MOSWITCH pin
+SPICLK = 11         #ADC pin 1
+SPIMISO = 9         #ADC pin 2
+SPIMOSI = 10        #ADC pin 3
+SPICS = 8            #ADC pin 4
+moswitch_pin = 23    #MOSWITCH pin
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
@@ -34,6 +30,8 @@ GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPIMOSI, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 GPIO.setup(moswitch_pin, GPIO.OUT)
+
+GPIO.output(moswitch_pin,0)
 
 
 ########################################################################
@@ -92,17 +90,20 @@ input("When you are ready to begin the measurements, please press Enter to conti
 
 
 #Charge the capacitor
-
+GPIO.output(moswitch_pin,1)
 
 
 #Switch the moswitch to engage the discharge circuit
 print('The switch will now disconnect the capacitor from the charging circuit and connect it to the discharging circuit. You will notice that the green LED turns off, and the red LED turns on. As the capacitor discharges the voltage will be printed every 10 seconds.')
 input("When you are ready to begin, please press Enter to continue.")
-GPIO.output(moswitch_pin,1)
+GPIO.output(moswitch_pin,0)
 
-voltage = readadc(AO_pin, SPICLK, SPIMOSI, SPIMISO, SPICS)
-print("Voltage = " + str("%.2f"%voltage) + "V")
-
+i = 0
+while(i<20):
+    voltage = readadc(AO_pin, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    print(str(i) + ": Voltage = " + str("%.2f"%voltage) + "V")
+    time.sleep(10)
+    i=i+1
 
 #END OF THE EXPERIMENT
 print('You have now taken all measurements required for this experiment.\nPlease refer to the labscript for the next steps.')
