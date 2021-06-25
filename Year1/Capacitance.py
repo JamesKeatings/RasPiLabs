@@ -17,10 +17,14 @@ import sys
 
 #Set up GPIO
 AO_pin = 0
-SPICKL = 11         #ADC pin 1
-SPIMISO = 9         #ADC pin 2
-SPIMOSI = 10        #ADC pin 3
-SPICS = 8            #ADC pin 4
+#SPICKL = 11         #ADC pin 1
+#SPIMISO = 9         #ADC pin 2
+#SPIMOSI = 10        #ADC pin 3
+#SPICS = 8            #ADC pin 4
+SPICKL = 23
+SPIMISO = 21
+SPIMOSI = 19
+SPICS = 24
 moswitch_pin = 16    #MOSWITCH pin
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
